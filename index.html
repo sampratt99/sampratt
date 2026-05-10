@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sam Pratt</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Sam Pratt is a Psychology PhD student at UCLA studying moral and political disagreement, harmful speech, and academic freedom. Research, publications, podcast, and newsletter." />
+<meta name="author" content="Sam Pratt" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/favicon.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Sam Pratt" />
+<meta property="og:description" content="Research on moral and political disagreement, harmful speech, and academic freedom." />
+<meta property="og:image" content="assets/pratt_headshot.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sam Pratt" />
+<meta name="twitter:description" content="Research on moral and political disagreement, harmful speech, and academic freedom." />
+<meta name="twitter:image" content="assets/pratt_headshot.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; overflow-x: hidden; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: #f0eee9; }
+  * { box-sizing: border-box; }
+  a { -webkit-tap-highlight-color: transparent; }
+  .prose a { color: inherit; text-decoration: none; border-bottom: 1.5px solid currentColor; padding-bottom: 0.5px; transition: color 0.18s, border-color 0.18s; font-weight: 500; }
+  .prose a:hover { color: #b85a3c; border-color: #b85a3c; }
+  /* Suppress lingering click-focus outlines; preserve keyboard focus rings */
+  a, button { -webkit-tap-highlight-color: transparent; }
+  a:focus, button:focus { outline: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid #b85a3c; outline-offset: 2px; border-radius: 4px; }
+  /* Podcast pill button — pure CSS hover so state can never linger */
+  button.pod-pill { background: transparent; color: #15192a; border: 1px solid rgba(21,25,42,0.14); transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease; }
+  button.pod-pill:hover { background: #1f2a4a; color: #ffffff; border-color: #1f2a4a; }
+  button.pod-pill.is-open { color: #1f2a4a; border-color: #1f2a4a; }
+  button.pod-pill.is-open:hover { background: #1f2a4a; color: #ffffff; border-color: #1f2a4a; }
+  /* Primary CTA hover — applied via inline style on hover state */
+  .btn-primary:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 24px -10px rgba(184, 90, 60, 0.55); filter: brightness(1.05); }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+  /* ════════════════════════════════════════════════════════════════════
+     MOBILE / TABLET RESPONSIVE — overrides for inline styles
+     Desktop layout (>= 900px) is untouched.
+  ════════════════════════════════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    /* ── Header / nav ──────────────────────────────────────────────── */
+    body > div#root header { padding: 16px 18px !important; }
+    body > div#root header > div { gap: 14px !important; flex-wrap: wrap !important; }
+    body > div#root header nav { gap: 2px !important; flex-wrap: wrap !important; justify-content: flex-end !important; row-gap: 6px !important; }
+    body > div#root header nav a,
+    body > div#root header nav button { font-size: 12.5px !important; padding: 7px 10px !important; }
+    body > div#root header nav a[target="_blank"] { font-size: 11px !important; padding: 6px 9px !important; letter-spacing: 0.3px !important; }
+    /* Brand secondary line hidden on phones to save room */
+    body > div#root header > div > a > span:nth-child(2) { display: none !important; }
+    body > div#root header > div > a { font-size: 17px !important; }
+
+    /* ── Main content padding ──────────────────────────────────────── */
+    body > div#root main { padding: 36px 22px !important; }
+
+    /* ── Home hero ─────────────────────────────────────────────────── */
+    .home-grid { grid-template-columns: 1fr !important; gap: 28px !important; min-height: auto !important; padding: 24px 0 32px !important; }
+    .home-grid > div:first-child { max-width: 280px !important; margin: 0 auto !important; }
+    .home-name { font-size: 54px !important; letter-spacing: -1.5px !important; line-height: 1 !important; margin-bottom: 18px !important; }
+    .home-bio { font-size: 16.5px !important; line-height: 1.55 !important; }
+
+    /* ── Section titles ─────────────────────────────────────────────── */
+    .about-title { font-size: 36px !important; line-height: 1.05 !important; }
+    .page-title { font-size: 36px !important; letter-spacing: -1px !important; line-height: 1.05 !important; }
+
+    /* ── Research / sci-comm bands ─────────────────────────────────── */
+    .research-band { padding: 64px 18px !important; }
+    .research-card { padding: 36px 24px !important; }
+    .sci-comm-band { padding: 56px 18px 72px !important; }
+    .chapter-card { padding: 28px 22px !important; margin-bottom: 14px !important; }
+
+    /* ── Publication / writing / press rows: stack vertically ──────── */
+    .pub-row, .writing-row, .press-row {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 6px !important;
+      position: relative !important;
+      padding: 18px 16px !important;
+      padding-right: 40px !important;
+    }
+    .pub-row > :last-child, .writing-row > :last-child, .press-row > :last-child {
+      position: absolute !important;
+      top: 18px !important;
+      right: 14px !important;
+    }
+    .press-header-row { display: none !important; }
+
+    /* ── Interview cards: stack image + text ───────────────────────── */
+    .interview-card { grid-template-columns: 1fr !important; }
+    .interview-card iframe { height: 240px !important; min-height: 240px !important; }
+
+    /* ── Featured press (WSJ): stack image + text ──────────────────── */
+    .featured-press-grid { grid-template-columns: 1fr !important; }
+    .featured-press-image { min-height: 180px !important; aspect-ratio: 16 / 9 !important; }
+
+    /* ── CV embed: shorter on mobile ───────────────────────────────── */
+    .cv-embed { height: 540px !important; min-height: 540px !important; }
+
+    /* ── Footer: stack ─────────────────────────────────────────────── */
+    body > div#root footer { padding: 22px 20px !important; }
+    body > div#root footer > div { flex-direction: column !important; gap: 10px !important; align-items: flex-start !important; text-align: left !important; }
+    body > div#root footer > div > div { flex-wrap: wrap !important; gap: 12px !important; justify-content: flex-start !important; }
+  }
+
+  /* ── Tighter still on small phones ─────────────────────────────── */
+  @media (max-width: 540px) {
+    .home-name { font-size: 44px !important; }
+    .about-title { font-size: 30px !important; }
+    .page-title { font-size: 30px !important; }
+    body > div#root main { padding: 28px 16px !important; }
+    .research-band { padding: 48px 14px !important; }
+    .sci-comm-band { padding: 44px 14px 56px !important; }
+    .research-card { padding: 28px 18px !important; }
+    .chapter-card { padding: 24px 18px !important; }
+    /* Hide external nav buttons on tightest screens — keep core nav clean */
+    body > div#root header nav a[target="_blank"] { display: none !important; }
+    body > div#root header > div > a { font-size: 16px !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="variations/data.jsx"></script>
+<script type="text/babel" src="variations/site.jsx"></script>
+<script type="text/babel" src="variations/palettes.jsx"></script>
+
+<script type="text/babel">
+  // Render the site directly — preview now matches what the deployed page
+  // will look like (page height = content height + footer).
+  // The previous design-canvas wrapper preview lives in index-canvas.html.
+  ReactDOM.createRoot(document.getElementById('root')).render(<window.SamSite />);
+</script>
+</body>
+</html>
