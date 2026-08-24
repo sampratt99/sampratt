@@ -15,12 +15,15 @@
 <meta property="og:site_name" content="Sam Pratt" />
 <meta property="og:title" content="Sam Pratt — Moral Psychology, UCLA" />
 <meta property="og:description" content="Research on moral and political disagreement, harmful speech, and academic freedom." />
-<meta property="og:image" content="assets/pratt_headshot.png" />
+<meta property="og:image" content="https://sampratt99.github.io/assets/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Sam Pratt — PhD Student in Psychology, UCLA" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@sampratt99" />
 <meta name="twitter:title" content="Sam Pratt — Moral Psychology, UCLA" />
 <meta name="twitter:description" content="Research on moral and political disagreement, harmful speech, and academic freedom." />
-<meta name="twitter:image" content="assets/pratt_headshot.png" />
+<meta name="twitter:image" content="https://sampratt99.github.io/assets/og-card.png" />
 <!-- Google Scholar / Zotero citation metadata for the profile owner -->
 <meta name="citation_author" content="Pratt, Sam" />
 <meta name="citation_author_institution" content="University of California, Los Angeles" />
@@ -98,9 +101,37 @@
 <script src="vendor/react-dom.min.js"></script>
 
 <script src="variations/data.js"></script>
+<script src="variations/cv-data.js"></script>
+<script src="variations/cv.js"></script>
 <script src="variations/site.js"></script>
 <script src="variations/palettes.js"></script>
 
 <script>ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(window.SamSite));</script>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     ANALYTICS — GoatCounter (free, privacy-friendly, no cookie banner).
+     Dashboard: https://sampratt99.goatcounter.com
+     Loaded from script rather than a plain tag for two reasons: localhost
+     visits aren't counted, and each tab change is recorded — a default
+     install would only ever log the home page on a single-page site.
+     ══════════════════════════════════════════════════════════════════════ -->
+<script>
+  (function () {
+    var code = 'sampratt99';
+    if (!code || code.indexOf('YOUR') === 0) return; // not configured
+    if (location.hostname === 'localhost') return;   // don't count your own testing
+    var s = document.createElement('script');
+    s.async = true;
+    s.dataset.goatcounter = 'https://' + code + '.goatcounter.com/count';
+    s.src = '//gc.zgo.at/count.js';
+    document.head.appendChild(s);
+    // The site is a single page with hash routing, so record each view too.
+    window.addEventListener('hashchange', function () {
+      if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count({ path: location.pathname + location.hash, event: false });
+      }
+    });
+  })();
+</script>
 </body>
 </html>

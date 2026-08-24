@@ -6,6 +6,18 @@
    Hosts: index.html, index-canvas.html
    ══════════════════════════════════════════════════════════════════════ */
 
+  /* ── Rendered CV ─────────────────────────────────────────────────── */
+  .cv-body a { color: inherit; text-decoration: none; border-bottom: 1px solid color-mix(in oklab, currentColor 35%, transparent); word-break: break-word; }
+  .cv-body a:hover { border-bottom-color: currentColor; }
+  .cv-ref { orphans: 3; widows: 3; }
+  .btn-quiet:hover { background: rgba(21,25,42,.05); border-color: rgba(21,25,42,.3) !important; }
+  a.osf-badges:hover { border-color: rgba(21,25,42,.34) !important; background: rgba(21,25,42,.04) !important; }
+
+  /* Global link colour — without this, any link added later (or any text placed
+     directly in a row) falls back to browser-default blue on the cream page. */
+  a { color: #b85a3c }
+  a:hover { color: #1f2a4a }
+
   /* ── Base reset + shared element styles ─────────────────────────── */
 html, body { margin: 0; padding: 0; overflow-x: hidden; }
   body { font-family: var(--font-body); background: #f0eee9; }
@@ -149,9 +161,15 @@ html, body { margin: 0; padding: 0; overflow-x: hidden; }
     .featured-press-grid { grid-template-columns: 1fr !important; }
     .featured-press-image { min-height: 180px !important; aspect-ratio: 16 / 9 !important; }
 
-    /* ── CV: PDF iframes don't render on mobile browsers ───────────── */
-    .cv-embed-wrap { display: none !important; }
-    .cv-mobile-note { display: block !important; }
+    /* ── Featured research: figure above text ───────────────────── */
+    a.hl-row { grid-template-columns: 1fr auto !important; gap: 12px !important; }
+    a.hl-row img { grid-column: 1 / -1 !important; }
+
+    /* ── CV: collapse the year gutter into stacked rows ────────────── */
+    .cv-entry, .cv-rows { grid-template-columns: 1fr !important; row-gap: 4px !important; }
+    .cv-entry { margin-bottom: 22px !important; }
+    .cv-rows > div:nth-child(odd) { padding-top: 10px !important; }
+    .cv-rows > div:nth-child(even) { margin-bottom: 6px !important; }
 
     /* ── Footer: stack ─────────────────────────────────────────────── */
     body > div#root footer { padding: 22px 20px !important; }
@@ -172,4 +190,27 @@ html, body { margin: 0; padding: 0; overflow-x: hidden; }
     body > div#root header > div:first-child > a { font-size: 16px !important; }
     .press-tabs-row { width: 100% !important; }
     .press-tabs-row button { flex: 1 !important; justify-content: center !important; }
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════
+     PRINT — the CV page doubles as the printable CV, so Cmd+P (or the Print
+     button) yields a clean document with no site chrome. Type drops to point
+     sizes; the year gutter narrows; sections avoid breaking mid-entry.
+     ══════════════════════════════════════════════════════════════════════ */
+  @media print {
+    @page { margin: 0.7in; }
+    html, body { background: #fff !important; }
+    body > div#root header, body > div#root footer, .cv-actions, .skip-link { display: none !important; }
+    body > div#root main { padding: 0 !important; max-width: none !important; }
+    .page-heading, .cv-body { max-width: none !important; }
+    .page-title { font-size: 26pt !important; letter-spacing: 0 !important; }
+    .cv-body { font-size: 10.4pt !important; }
+    .cv-body h2 { font-size: 11pt !important; margin: 20pt 0 8pt !important; break-after: avoid; }
+    .cv-body h3 { font-size: 8.5pt !important; margin: 12pt 0 5pt !important; break-after: avoid; }
+    .cv-entry, .cv-ref { break-inside: avoid; }
+    .cv-entry { grid-template-columns: 5.6em 1fr !important; gap: 1em !important; margin-bottom: 8pt !important; }
+    .cv-rows { grid-template-columns: 5.6em 1fr !important; column-gap: 1em !important; row-gap: 5pt !important; }
+    .cv-body > section { break-inside: auto; }
+    .cv-body a { border-bottom: none !important; color: #1b1a18 !important; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
