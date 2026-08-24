@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sampratt99.github.io/sitemap.xml

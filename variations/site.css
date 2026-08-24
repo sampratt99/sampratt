@@ -1,0 +1,175 @@
+/* ══════════════════════════════════════════════════════════════════════
+   Shared stylesheet for every page that mounts variations/site.jsx.
+   site.jsx emits class hooks (.nav-desktop, .nav-toggle, .nav-mobile,
+   .pub-row, .home-name, …) and reads --font-* variables from here, so ANY
+   host page loading site.jsx must link this file or the nav and type break.
+   Hosts: index.html, index-canvas.html
+   ══════════════════════════════════════════════════════════════════════ */
+
+  /* ── Base reset + shared element styles ─────────────────────────── */
+html, body { margin: 0; padding: 0; overflow-x: hidden; }
+  body { font-family: var(--font-body); background: #f0eee9; }
+  * { box-sizing: border-box; }
+  a { -webkit-tap-highlight-color: transparent; }
+  .prose a { color: inherit; text-decoration: none; border-bottom: 1.5px solid currentColor; padding-bottom: 0.5px; transition: color 0.18s, border-color 0.18s; font-weight: 500; }
+  .prose a:hover { color: #b85a3c; border-color: #b85a3c; }
+  /* Suppress lingering click-focus outlines; preserve keyboard focus rings */
+  a, button { -webkit-tap-highlight-color: transparent; }
+  a:focus, button:focus { outline: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid #b85a3c; outline-offset: 2px; border-radius: 4px; }
+  header a:focus-visible, header button:focus-visible { outline: 2px solid #f4efe3; outline-offset: 2px; }
+  /* Skip link for keyboard + screen-reader users */
+  .skip-link { position: absolute; left: -9999px; top: 0; z-index: 999; background: #f4efe3; color: #1f2a4a; font: 600 14px/1 var(--font-ui); padding: 12px 18px; border-radius: 0 0 8px 0; text-decoration: none; }
+  .skip-link:focus { left: 0; }
+  /* Pill buttons (podcast toggle, copy citation) — pure CSS hover so state can never linger */
+  button.pod-pill { background: transparent; color: #15192a; border: 1px solid rgba(21,25,42,0.14); transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease; }
+  button.pod-pill:hover { background: #1f2a4a; color: #ffffff; border-color: #1f2a4a; }
+  button.pod-pill.is-open { color: #1f2a4a; border-color: #1f2a4a; }
+  button.pod-pill.is-open:hover { background: #1f2a4a; color: #ffffff; border-color: #1f2a4a; }
+  button.pod-pill.is-done { background: #1f2a4a; color: #fff; border-color: #1f2a4a; }
+  /* Primary CTA hover — applied via inline style on hover state */
+  .btn-primary:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 24px -10px rgba(184, 90, 60, 0.55); filter: brightness(1.05); }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+/* ════════════════════════════════════════════════════════════════════
+     TYPE SYSTEM — "Journal": Source Serif 4 for display + body, Instrument
+     Sans for UI chrome (nav, labels, pills, buttons, meta).
+     Three roles, consumed by palettes.jsx as var(--font-display|body|ui).
+  ════════════════════════════════════════════════════════════════════ */
+  :root {
+    --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-ui: "Instrument Sans", system-ui, -apple-system, sans-serif;
+  }
+  /* Serif headlines need looser tracking than the sans they replaced. */
+  .home-name { letter-spacing: -1.5px !important; }
+  .about-title, .page-title { letter-spacing: -1px !important; }
+
+  /* ── Mobile menu: hidden entirely on desktop; revealed below 1080px ── */
+  .nav-toggle { display: none; }
+  .nav-mobile { display: none; }
+
+  /* ════════════════════════════════════════════════════════════════════
+     NAV SWAP — below 1080px the inline nav becomes a hamburger menu.
+     Set here (not 900px) so landscape tablets get the clean menu too.
+  ════════════════════════════════════════════════════════════════════ */
+  @media (max-width: 1080px) {
+    .nav-desktop { display: none !important; }
+    .nav-toggle {
+      display: inline-flex !important; align-items: center; justify-content: center;
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: transparent; border: 1px solid rgba(255,255,255,0.4); border-radius: 10px;
+      cursor: pointer; padding: 0; transition: background 0.18s ease, border-color 0.18s ease;
+    }
+    .nav-toggle:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.7); }
+    .nav-toggle span { display: block; position: absolute; width: 20px; height: 2px; background: #f4efe3; border-radius: 2px; transition: transform 0.24s ease, opacity 0.18s ease; }
+    .nav-toggle span:nth-child(1) { transform: translateY(-6px); }
+    .nav-toggle span:nth-child(3) { transform: translateY(6px); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg); }
+    .nav-mobile.is-open { display: flex !important; }
+  }
+
+  /* ════════════════════════════════════════════════════════════════════
+     TABLET — 901px to 1080px: desktop layout, softened type scale
+  ════════════════════════════════════════════════════════════════════ */
+  @media (min-width: 901px) and (max-width: 1180px) {
+    body > div#root main { padding: 52px 40px !important; }
+    .home-name { font-size: 68px !important; letter-spacing: -1.2px !important; }
+    .home-bio { font-size: 18px !important; }
+    .home-grid { gap: 40px !important; min-height: 440px !important; }
+    .about-title { font-size: 44px !important; letter-spacing: -1.4px !important; }
+    .page-title { font-size: 46px !important; letter-spacing: -1.5px !important; }
+    .research-card { padding: 48px 44px !important; }
+    .chapter-card { padding: 40px 36px !important; }
+    .research-band { padding-left: 32px !important; padding-right: 32px !important; padding-top: 88px !important; padding-bottom: 88px !important; }
+    .sci-comm-band { padding-left: 32px !important; padding-right: 32px !important; }
+    .pub-row { grid-template-columns: 72px 1fr 24px !important; gap: 18px !important; }
+    .press-row, .press-header-row { grid-template-columns: 80px 180px 1fr 22px !important; gap: 20px !important; }
+    .writing-row { grid-template-columns: 100px 160px 1fr 22px !important; gap: 18px !important; }
+    .interview-card { grid-template-columns: 1.3fr 1fr !important; }
+  }
+
+  /* ════════════════════════════════════════════════════════════════════
+     MOBILE / SMALL TABLET RESPONSIVE — overrides for inline styles
+  ════════════════════════════════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    /* ── Header ────────────────────────────────────────────────────── */
+    body > div#root header { padding: 16px 18px !important; }
+    body > div#root header > div:first-child { gap: 14px !important; }
+    body > div#root header > div:first-child > a { font-size: 17px !important; }
+
+    /* ── Main content padding ──────────────────────────────────────── */
+    body > div#root main { padding: 36px 22px !important; }
+
+    /* ── Home hero ─────────────────────────────────────────────────── */
+    .home-grid { grid-template-columns: 1fr !important; gap: 28px !important; min-height: auto !important; padding: 24px 0 32px !important; }
+    .home-grid > div:first-child { max-width: 280px !important; margin: 0 auto !important; }
+    .home-name { font-size: 54px !important; letter-spacing: -1px !important; line-height: 1 !important; margin-bottom: 18px !important; }
+    .home-bio { font-size: 16.5px !important; line-height: 1.55 !important; }
+    /* Social row wraps instead of overflowing */
+    .home-link-row { flex-wrap: wrap !important; gap: 8px !important; margin-top: 28px !important; }
+
+    /* ── Section titles ─────────────────────────────────────────────── */
+    .about-title { font-size: 36px !important; line-height: 1.05 !important; }
+    .page-title { font-size: 36px !important; letter-spacing: -1px !important; line-height: 1.05 !important; }
+
+    /* ── Research / sci-comm bands ─────────────────────────────────── */
+    .research-band { padding: 64px 18px !important; }
+    .research-card { padding: 36px 24px !important; }
+    .sci-comm-band { padding: 56px 18px 72px !important; }
+    .chapter-card { padding: 28px 22px !important; margin-bottom: 14px !important; }
+    /* Book card: stack cover under text */
+    .book-card { grid-template-columns: 1fr !important; gap: 28px !important; }
+    .book-card > a { max-width: 240px !important; margin: 0 auto !important; }
+
+    /* ── Publication / writing / press rows: stack vertically ──────── */
+    .pub-row, .writing-row, .press-row {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 6px !important;
+      position: relative !important;
+      padding: 18px 16px !important;
+      padding-right: 40px !important;
+    }
+    .pub-row > :last-child, .writing-row > :last-child, .press-row > :last-child {
+      position: absolute !important;
+      top: 18px !important;
+      right: 14px !important;
+    }
+    .press-header-row { display: none !important; }
+
+    /* ── Interview cards: stack image + text ───────────────────────── */
+    .interview-card { grid-template-columns: 1fr !important; }
+    .interview-card iframe { height: 240px !important; min-height: 240px !important; }
+
+    /* ── Featured press (WSJ): stack image + text ──────────────────── */
+    .featured-press-grid { grid-template-columns: 1fr !important; }
+    .featured-press-image { min-height: 180px !important; aspect-ratio: 16 / 9 !important; }
+
+    /* ── CV: PDF iframes don't render on mobile browsers ───────────── */
+    .cv-embed-wrap { display: none !important; }
+    .cv-mobile-note { display: block !important; }
+
+    /* ── Footer: stack ─────────────────────────────────────────────── */
+    body > div#root footer { padding: 22px 20px !important; }
+    body > div#root footer > div { flex-direction: column !important; gap: 10px !important; align-items: flex-start !important; text-align: left !important; }
+    body > div#root footer > div > div { flex-wrap: wrap !important; gap: 12px !important; justify-content: flex-start !important; }
+  }
+
+  /* ── Tighter still on small phones ─────────────────────────────── */
+  @media (max-width: 540px) {
+    .home-name { font-size: 44px !important; }
+    .about-title { font-size: 30px !important; }
+    .page-title { font-size: 30px !important; }
+    body > div#root main { padding: 28px 16px !important; }
+    .research-band { padding: 48px 14px !important; }
+    .sci-comm-band { padding: 44px 14px 56px !important; }
+    .research-card { padding: 28px 18px !important; }
+    .chapter-card { padding: 24px 18px !important; }
+    body > div#root header > div:first-child > a { font-size: 16px !important; }
+    .press-tabs-row { width: 100% !important; }
+    .press-tabs-row button { flex: 1 !important; justify-content: center !important; }
+  }
