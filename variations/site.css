@@ -131,6 +131,7 @@ html, body { margin: 0; padding: 0; overflow-x: hidden; }
     .research-band { padding: 64px 18px !important; }
     .research-card { padding: 36px 24px !important; }
     .sci-comm-band { padding: 56px 18px 72px !important; }
+    .ra-bar { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
     .chapter-card { padding: 28px 22px !important; margin-bottom: 14px !important; }
     /* Book card: stack cover under text */
     .book-card { grid-template-columns: 1fr !important; gap: 28px !important; }
